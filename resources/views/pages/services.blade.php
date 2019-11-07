@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>{{config('app.name', 'Anubhav Forum')}}</title>
+@section('content')
+    <h1>{{$title}}</h1>
+    <p>This is the Advanced Web Engineering Project Services Page</p>
+    @if (count($services) > 0)
+        @foreach ($services as $service)
+           <li>{{$service}}</li> 
+        @endforeach        
+    @endif
+@endsection
 
-    </head>
-    <body>
-        <h1>Welcome to laravel</h1>
-        <p>This is the Advanced Web Engineering Project Services Page</p>
-    </body>
-</html>
