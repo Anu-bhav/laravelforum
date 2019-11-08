@@ -31,7 +31,9 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('article-ckeditor');
+        if($("textarea").length > 0){
+            CKEDITOR.replace('article-ckeditor');
+        }   
     </script>
 
 </html>
