@@ -40,4 +40,9 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany('App\Post');
     }
+
+    public static function byEmail($email)
+    {
+        return static::where('email', $email)->firstOrFail();
+    }
 }

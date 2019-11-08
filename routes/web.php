@@ -27,3 +27,8 @@ Route::resource('posts', 'PostsController');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
+
+Route::get('/email_login', 'Auth\LoginController@email_login')->name('email_login');
+Route::post('/email_login', 'Auth\LoginController@postLogin');
+
+Route::get('auth/token/{token}', 'Auth\LoginController@authenticate');
