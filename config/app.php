@@ -175,6 +175,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // Form Services Providers - https://laravelcollective.com/docs/5.4/html
+        Collective\Html\HtmlServiceProvider::class,
+
+        // CKEditor Package - https://github.com/UniSharp/laravel-ckeditor
+        Unisharp\Ckeditor\ServiceProvider::class,
+
     ],
 
     /*
@@ -225,6 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
