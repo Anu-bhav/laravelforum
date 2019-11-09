@@ -3,13 +3,13 @@
 @section('content')
     <a href="/posts" class="btn btn-outline-primary mb-4" role="button">Go Back</a>
     
-    <h3>{{$post->title}}</h3>
+    <h2>{{$post->title}}</h2>
     <p><small class="text-muted">Written on {{$post->created_at}} by {{ucfirst($post->user->name)}}</small></p>
     <hr>
     <img class="card-img-top p-4" src="/storage/cover_images/{{$post->cover_image}}" alt="Card image" style="width:50%">
     <br><br>
     <div>
-        <h4>{!! $post->body !!}</h4>
+        <h5>{!! $post->body !!}</h5>
     </div>
     <hr>
 
