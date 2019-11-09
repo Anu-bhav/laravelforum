@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 08, 2019 at 06:22 PM
+-- Generation Time: Nov 09, 2019 at 09:17 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -83,9 +83,10 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
-  `cover_image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
+  `cover_image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `posts_user_id_foreign` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
