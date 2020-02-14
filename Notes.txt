@@ -90,7 +90,7 @@ Checkpoint 2:
         Upon entering the link sent, the request goes to:
             Controller: App/Http/Controllers/Auth/LoginController
             Function: authenticate()
-    Bug in Swift_Transport package: https://github.com/swiftmailer/swiftmailer/issues/1080
+    Bug found in Swift_Transport package: https://github.com/swiftmailer/swiftmailer/issues/1080
     "Swift_TransportException Process could not be started [The system cannot find the path specified. ]"
     Unable to send mail but can output to log.
 
