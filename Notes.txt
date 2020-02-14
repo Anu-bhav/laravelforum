@@ -1,0 +1,114 @@
+ALIAS COMMANDS
+alias cache="php artisan cache:clear"
+alias config="php artisan config:clear"
+alias route="php artisan route:clear"
+alias route_list="php artisan route:list"
+alias phpunit="vendor/bin/phpunit --verbose --debug --color=always"
+alias tinker="php artisan tinker"
+
+FACTORIES IN TINKER
+factory('App\User')->create();
+factory('App\Post')->create();
+
+VIDEO DEMONSTRATION
+Checkpoint 1:
+• Routing
+    What is Routing?
+        In Laravel, all requests are mapped with the help of routes. Basic routing routes the request to the associated controllers. 
+    command: php artisan route:list
+    folder: routes/web.php
+
+• Layout files with Blade
+    What is blade?
+        Blade is a simple, yet powerful templating engine provided with Laravel. Unlike controller layouts, Blade is driven by template inheritance and sections. All Blade templates should use the . blade. php extension.
+    Layout
+        folder: resources/views
+        main app layout: resources/views/layouts/app.blade.php
+        @include
+            navbar layout: resources/views/inc/navbar.blade.php
+        @extends
+            index page: resources/views/pages/index.blade.php
+
+• Sending data to views
+    Example 1:     
+        PagesController: App/Http/Controllers/PagesController.php
+        return view("pages.services")->with($data);
+
+• Controllers
+    What is a controller?
+        Controllers are meant to group associated request handling logic within a single class. In your Laravel project, they are stored in the app/Http/Controllers' directory. The full form of MVC is Model View Controller, which act as directing traffic among the Views and the Models.
+    Example:
+        PostsController: App/Http/Controllers/PostsController.php
+        command: php artisan make:controller PostsController --resource
+        Create function
+            Gets the page resources/views/posts/create.blade.php (HTTP GET)
+            Posts the page to PostsController@store (HTTP POST)
+        
+• Database integration through migrations and the Eloquent ORM
+    What is Eloquent ORM?
+        The Eloquent ORM included with Laravel provides a beautiful, simple ActiveRecord implementation for working with your database. Each database table has a corresponding "Model" which is used to interact with that table.
+    Command:
+        php artisan make:model Post -m
+        php artisan migrate
+    Migrations folder: database/migrations
+    
+• Forms including CSRF protection and data modification
+    CSRF protection: resources/views/layouts/app.blade.php
+        Automatically done by Auth middleware found in App/Middleware/VerifyCsrfToken.php
+    Data modification: 
+
+• Data cleansing and validation
+    Example: 
+        Controller: App/Http/Controllers/PostsController.php
+        Function: store
+            Process post request upon creation of post 
+            Enforces required fields
+                'title' => 'required'
+            Validates parameters
+                'cover_image' => 'image|nullable|max:1999'
+
+• Registration and authentication
+    command: php artisan make:auth
+    views created by command are under: resources/views/auth
+    access the authenticated user via the Auth facade
+        Example: App/Http/Controllers/DashboardController.php
+            Dashboard page can only be viewed if a user is authenticated.
+
+• Authorisation and Laravel Gate
+    Example: resources/views/posts/show.blade.php
+        Edit and Delete button hidden if not the owner of the posts
+
+Checkpoint 2:
+• Mailables
+    Implementation in conjunction with Advanced authentication techniques
+        Controller: App/Http/Controllers/Auth/LoginController
+        Function: email_login()
+        view: resources/views/auth/passwords/email.blade.php
+        Request goes to:
+            Model: App/AuthenticatesUser
+            Function: invite() - to generate token and send the mail to the user
+        Upon entering the link sent, the request goes to:
+            Controller: App/Http/Controllers/Auth/LoginController
+            Function: authenticate()
+
+• Events and notifications
+    This is handled by sessions: resources/views/inc/messages.blade.php
+
+• Collections
+    What is Eloquent Collections?
+    All multi-result sets returned by Eloquent are instances of the Illuminate\Database\Eloquent\Collection object, including results retrieved via the get method or accessed via a relationship.  
+    Controller: App/Http/Controllers/PostsController.php@index
+        paginate() is part of Eloquent: Collections
+    Factory: database/factories/UserFactory.php
+        unique() is part of Eloquent: Collections
+
+• Sessions
+    Used to display events and notifications and csrf protection
+
+• Test Driven Development with PHPUnit
+    command: vendor/bin/phpunit --verbose --debug --color=always
+    folder: tests/Feature/DatabaseTest.php
+
+• Eloquent relationships and techniques
+
+• Advanced authentication techniques

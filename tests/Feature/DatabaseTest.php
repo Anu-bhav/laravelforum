@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Exceptions\Handler;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use App\User;
+use App\Post;
 
 class DatabaseTest extends TestCase
 {
@@ -33,10 +34,10 @@ class DatabaseTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // vendor/bin/phpunit --verbose --debug --color=always --filter test_create_user_and_login_and_redirect_to_dashboard
-    public function test_create_user_and_login_and_redirect_to_dashboard()
+    // vendor/bin/phpunit --verbose --debug --color=always --filter test_database_create_user_and_login_and_redirect_to_dashboard
+    public function test_database_create_user_and_login_and_redirect_to_dashboard()
     {
-        //$this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->withExceptionHandling();
 
         // php artisan migrate:refresh
@@ -54,5 +55,25 @@ class DatabaseTest extends TestCase
         $response->assertRedirect(route('dashboard'));
 
         $this->assertAuthenticatedAs($user);
+    }
+
+
+    public function test_database_create_user_and_the_user_creates_post()
+    {
+        $this->withExceptionHandling();
+
+
+        $response = factory(User::class, 3)
+        ->create()
+        ->each(function($u) {
+             $u->posts()->save(
+                $post = factory(Post::class)->create());
+             $response = $this->get('/posts');
+             $response->assertSee($post->title);
+         });
+
+         
+
+
     }
 }

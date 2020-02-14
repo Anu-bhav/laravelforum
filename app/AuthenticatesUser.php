@@ -31,6 +31,7 @@ class AuthenticatesUser extends Model
         $this->validateRequest()
             ->createToken()
             ->send();
+        // Goes back to LoginController for User Authentication
     }
     /**
      * Log in the user associated with a token.

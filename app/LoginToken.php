@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Model;
+use App\Mail\TokenMail;
 
 class LoginToken extends Model
 {
@@ -20,6 +21,7 @@ class LoginToken extends Model
      * @param  User $user
      * @return $this
      */
+    // Returns back to AuthenticatesUser@invite
     public static function generateFor(User $user)
     {
         return static::create([
@@ -44,14 +46,25 @@ class LoginToken extends Model
     public function send()
     {
         $url = url('/auth/token', $this->token);
+        /*
+        * The post request from /auth/token will be authenticated in LoginController@authenticate
+        *
+        */
+        // Mail::raw(
+        //     "Click the link to login: <a href='{$url}'>{$url}</a>",
+        //     function ($message) {
+        //         $message->to($this->user->email)
+        //             ->subject('Login to my Hacking Forum');
+        //     }
+        // );
 
-        Mail::raw(
-            "Click the link to login: <a href='{$url}'>{$url}</a>",
-            function ($message) {
-                $message->to($this->user->email)
-                    ->subject('Login to my Hacking Forum');
-            }
-        );
+        // $data = array("name" => $this->user->name, "body" => $url);
+        // Mail::send('inc.mail', $data, function ($message) {
+        //             $message->to($this->user->email)
+        //                 ->subject('Login to my Hacking Forum');
+        // });
+        
+        Mail::to($this->user->email)->send(new TokenMail($this->user->name, $url));
     }
 
     /**
@@ -59,6 +72,7 @@ class LoginToken extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    // Eloquent relationships and techniques - One to One Relationship
     public function user()
     {
         return $this->belongsTo(User::class);

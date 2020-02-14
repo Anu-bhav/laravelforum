@@ -46,7 +46,7 @@ class PostsController extends Controller
         // limit number of posts
         // $posts = Post::orderBy('id', 'desc')->take(1)->get();
 
-        // pagination
+        // pagination is part of Eloquent: Collections
         $posts = Post::orderBy('id', 'desc')->paginate(10);
         return view('posts.index')->with('posts', $posts);
     }

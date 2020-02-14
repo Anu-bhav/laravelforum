@@ -21,9 +21,10 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 
-
+// Populates all necessary routes for the PostsController automatically
 Route::resource('posts', 'PostsController');
 
+// Auth::routes() is a helper class that helps you generate all the routes required for user authentication
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
