@@ -7,7 +7,7 @@ alias phpunit="vendor/bin/phpunit --verbose --debug --color=always"
 alias tinker="php artisan tinker"
 
 FACTORIES IN TINKER
-factory('App\User')->create();
+factory('App\User', 10)->create();
 factory('App\Post')->create();
 
 VIDEO DEMONSTRATION
@@ -90,6 +90,9 @@ Checkpoint 2:
         Upon entering the link sent, the request goes to:
             Controller: App/Http/Controllers/Auth/LoginController
             Function: authenticate()
+    Bug in Swift_Transport package: https://github.com/swiftmailer/swiftmailer/issues/1080
+    "Swift_TransportException Process could not be started [The system cannot find the path specified. ]"
+    Unable to send mail but can output to log.
 
 • Events and notifications
     This is handled by sessions: resources/views/inc/messages.blade.php
@@ -109,6 +112,25 @@ Checkpoint 2:
     command: vendor/bin/phpunit --verbose --debug --color=always
     folder: tests/Feature/DatabaseTest.php
 
-• Eloquent relationships and techniques
+• Eloquent relationships and techniques (Database relationships)
+    DONE ABOVE 
+• Advanced authentication techniques (No password login)
+    DONE ABOVE
 
-• Advanced authentication techniques
+Checkpoints 1 and 2 you should include demonstration and evaluation of at most three of the following:
+• The core architectural concepts of the Laravel framework
+    MVC - DONE
+• SOLID Principles in PHP
+    Coding in PHP - DONE
+• Building an app with TDD
+    Test Driven Development - Make use of phpunit - DONE
+• Intermediate level features such as scheduling, eventing, contracts
+    Partial - Use of eventing only
+• Approaches to testing Laravel
+    Test with phpunit - DONE
+• Front-end development with Laravel Vue
+• Symphony components
+• Real-time Laravel with Socket.io
+• Broadcasting with Laravel Echo
+• Design Patterns in PHP
+    Layouts, @include, @extends - DONE
